@@ -1,6 +1,7 @@
 import argparse
 from pathlib import Path
 from sales_analyzer.parser import parse_csv
+from sales_analyzer.revenueCalculator import total_revenue
 
 def main() -> None: #return typehint, funktion gibt nichts zurück
     parser = argparse.ArgumentParser(description="Sales Analyzer") #parser für den programmaufruf in cli
@@ -17,10 +18,12 @@ def main() -> None: #return typehint, funktion gibt nichts zurück
         return
 
     orders, skipped = parse_csv(path)
+    revenue = total_revenue(orders)
 
     print()
     print(f"File read: {path}")
-    print(f"Total number of orders:   {len(orders)}") #valide zeilen
+    print(f"Total number of orders: {len(orders)}") #valide zeilen
+    print(f"total revenue: {revenue}€")
     print(f"skipped rows: {len(skipped)}")
 
     if skipped:
