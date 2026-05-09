@@ -1,0 +1,31 @@
+order_id,order_date,customer_id,product_name,quantity,unit_price
+1001,2024-01-05,C-001,Screwdriver Set,2,19.90
+1002,2024-01-08,C-002,Cordless Drill Pro,1,149.00
+1003,2024-01-12,C-003,Wood Glue 250ml,3,4.50
+1004,2024-01-15,C-001,Safety Gloves,4,8.99
+1005,2024-01-20,C-004,Measuring Tape 5m,2,12.50
+1006,2024-02-02,C-002,Screwdriver Set,1,19.90
+1007,2024-02-07,C-005,Hammer Classic,1,24.99
+1008,2024-02-11,C-003,Cordless Drill Pro,2,149.00
+1009,2024-02-14,C-006,Wood Glue 250ml,5,4.50
+1010,2024-02-19,C-001,Sandpaper Pack,3,6.75
+,,,,,
+1012,2024-03-03,C-004,Cordless Drill Pro,1,149.00
+1013,2024-03-07,C-007,Safety Gloves,three,8.99
+1014,2024-03-10,C-002,Measuring Tape 5m,2,12.50
+1015,2024-03-14,C-005,Hammer Classic,1,24.99
+1016,2024-03-18,C-006,Screwdriver Set,2,
+1017,2024-03-22,C-003,Sandpaper Pack,4,6.75
+1018,2024-04-01,C-007,Wood Glue 250ml,2,4.50
+1019,2024-04-05,C-001,Cordless Drill Pro,1,149.00
+1020,2024-04-09,C-004,Safety Gloves,-3,8.99
+1021,2024-04-14,C-002,Hammer Classic,2,24.99
+1022,2024-04-18,C-005,Screwdriver Set,3,19.90
+1023,2024-04-23,C-006,Measuring Tape 5m,1,12.50
+1024,2024-05-02,C-007,Sandpaper Pack,6,6.75
+1025,2024-05-06,C-001,Wood Glue 250ml,4,4.50
+1026,2024-05-10,C-003,Cordless Drill Pro,1,149.00
+1027,2024-05-15,C-004,Safety Gloves,2,8.99
+1028,2024-05-20,C-002,Hammer Classic,1,24.99
+1029,2024-05-24,C-005,Screwdriver Set,2,19.90
+1030,2024-05-28,C-006,Measuring Tape 5m,3,12.50
