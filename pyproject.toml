@@ -1,0 +1,25 @@
+[build-system] #declare which build backend to use
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project] #specify project’s basic metadata, such as the dependencies, your name and programming language
+name = "sales-analyzer"
+version = "0.1.0"
+authors = [
+    { name="Sophie Meyer", email="Goofy.Dev-Tools@web.de" },
+]
+description = "A small example package for Tagueri"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3"
+]
+
+[project.optional-dependencies]
+dev = ["pytest"] ##für den entwickler / tests
+
+[project.scripts]
+sales-analyzer = "sales_analyzer.__main__:main" #registriert Kommandozeilenbefehl
+
+[tool.setuptools.packages.find]
+where = ["src"] #damit setuptools weiß, dass code in src ordner ist, nicht in root
