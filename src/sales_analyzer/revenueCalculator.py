@@ -29,3 +29,19 @@ def top_customers_by_revenue(orders: list[Order]):
     sorted_by_revenue = sorted(customer_revenue_dict.items(), key=lambda item: item[1], reverse=True)
 
     return sorted_by_revenue[0:5]
+
+
+def revenue_per_month(orders: list[Order]):
+    month_revenue_dict = {}
+
+    for order in orders:
+        month_key = order.order_date.strftime("%Y-%m")  # speichert datum als string z.B. "2024-01"
+
+        if month_key in month_revenue_dict:
+            month_revenue_dict[month_key] = month_revenue_dict.get(month_key) + (order.quantity * order.unit_price)
+        else:
+            month_revenue_dict[month_key] = order.quantity * order.unit_price
+
+    sorted_by_month = sorted(month_revenue_dict.items(), key=lambda item: item[0])
+
+    return sorted_by_month

@@ -1,7 +1,7 @@
 import argparse
 from pathlib import Path
 from sales_analyzer.parser import parse_csv
-from sales_analyzer.revenueCalculator import total_revenue, top_products_by_revenue, top_customers_by_revenue
+from sales_analyzer.revenueCalculator import total_revenue, top_products_by_revenue, top_customers_by_revenue, revenue_per_month
 
 
 def main() -> None: #return typehint, funktion gibt nichts zurück
@@ -22,16 +22,25 @@ def main() -> None: #return typehint, funktion gibt nichts zurück
     revenue = total_revenue(orders)
     top_products = top_products_by_revenue(orders)
     top_customers = top_customers_by_revenue(orders)
+    monthly_revenue = revenue_per_month(orders)
 
     print()
     print(f"File read: {path}")
-    print(f"Total number of orders: {len(orders)}") #valide zeilen
-    print(f"total revenue: {revenue}€")
-    print(f"top 5 products by revenue: {top_customers}")
+    print(f"total number of orders: {len(orders)}") #valide zeilen
+    print(f"total revenue: {revenue} €")
+    print()
+    print(f"top 5 products by revenue: ")
     for product, revenue in top_products:
         print(f"  {product}: {revenue:.2f} €")
     print()
-    print(f"top 5 customers by revenue: {top_customers}")
+    print(f"top 5 customers by revenue: ")
+    for customers, revenue in top_customers:
+        print(f"  {customers}: {revenue:.2f} €")
+    print()
+    print("revenue per month: ")
+    for month, revenue in monthly_revenue:
+        print(f"  {month}: {revenue:.2f} €")
+    print()
     print(f"skipped rows: {len(skipped)}")
 
     if skipped:
