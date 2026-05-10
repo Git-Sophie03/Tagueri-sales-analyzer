@@ -1,3 +1,4 @@
+import subprocess
 from sales_analyzer.parser import parse_csv, Order
 from datetime import date
 from sales_analyzer.revenueCalculator import total_revenue, top_products_by_revenue, top_customers_by_revenue, revenue_per_month
@@ -190,3 +191,44 @@ def test_revenue_per_month_calculated_correctly(tmp_path):
     for month_index, product in enumerate(month):
         assert month[month_index] == expected[month_index]
 
+def test_end_to_end():
+    # Act
+    result = subprocess.run(
+        ["python", "-m", "sales_analyzer", "--file", "test/sales_test.csv"],
+        capture_output=True,  # Ausgabe abfangen
+        text=True,             # Ausgabe als String
+        encoding="utf-8"
+    )
+
+    # Assert
+    assert result.returncode == 0 #programm ist nicht abgestürzt
+
+    expected_console_output = """File read: test\\sales_test.csv
+total number of orders: 5
+total revenue: 254.5 €
+
+top 5 products by revenue: 
+  Cordless Drill Pro: 149.00 €
+  Hammer: 39.80 €
+  Screwdriver Set: 29.70 €
+  Sandpaper Pack: 27.00 €
+  Wood Glue 250ml: 9.00 €
+
+top 5 customers by revenue: 
+  C-002: 158.00 €
+  C-001: 69.50 €
+  C-003: 27.00 €
+
+revenue per month: 
+  2024-01: 188.80 €
+  2024-02: 56.70 €
+  2024-03: 9.00 €
+
+skipped rows: 5
+  Row 7: empty row
+  Row 8: quantity is not a number: 'three'
+  Row 9: quantity must be greater than 0: '-1'
+  Row 10: unit price is not a number: ''
+  Row 11: order date is not a valid date: '2024-03-33'"""
+
+    assert expected_console_output == result.stdout
