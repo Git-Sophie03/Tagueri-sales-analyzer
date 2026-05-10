@@ -12,9 +12,9 @@ def top_products_by_revenue(orders: list[Order]):
         else:
             product_revenue_dict[order.product_name] = order.quantity * order.unit_price
 
-    sorted_by_revenue = sorted(product_revenue_dict.items(), key=lambda item: item[1], reverse=True)
+    sorted_by_revenue = sorted(product_revenue_dict.items(), key=lambda item: item[1], reverse=True)  #.items() macht dict zu ner liste von tupeln, item[1] holt den value, reverse sortiert absteigend
 
-    return sorted_by_revenue[0:5]
+    return sorted_by_revenue[0:5] #erste 5 einträge aus sortierer liste
 
 
 def top_customers_by_revenue(orders: list[Order]):
@@ -42,6 +42,6 @@ def revenue_per_month(orders: list[Order]):
         else:
             month_revenue_dict[month_key] = order.quantity * order.unit_price
 
-    sorted_by_month = sorted(month_revenue_dict.items(), key=lambda item: item[0])
+    sorted_by_month = sorted(month_revenue_dict.items(), key=lambda item: item[0]) #monate sortieren
 
     return sorted_by_month
