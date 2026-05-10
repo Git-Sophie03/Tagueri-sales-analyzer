@@ -32,8 +32,8 @@ def parse_csv(path: Path): #path ist der dateipfad
     orders: list[Order] = [] #leere listen initialisieren
     skipped: list[SkippedRow] = []
 
-    with open(path, newline="", encoding="utf-8") as f:
-        reader = csv.DictReader(f) # die datei basically
+    with open(path, newline="", encoding="utf-8") as file:
+        reader = csv.DictReader(file) # die datei basically
 
             #zähler,    zeile; start ist für row number
         for row_number, row in enumerate(reader, start=2):  # start=2 weil Zeile 1 der Header ist
@@ -45,13 +45,13 @@ def parse_csv(path: Path): #path ist der dateipfad
 
             # 2. order_id prüfen
             try:
-                order_id = int(row[ORDER_ID_COLUMN_NAME]) #wenn dieser key nicht gefunden wird fehler
+                order_id = int(row[ORDER_ID_COLUMN_NAME]) #wenn dieser key nicht gefunden wird keyError
             except KeyError:
                 skipped.append(SkippedRow(row_number, "column name could not be found: " + ORDER_ID_COLUMN_NAME))
                 continue
 
             except ValueError:
-                skipped.append(SkippedRow(row_number, f"order id is not a number: '{order_id}'"))
+                skipped.append(SkippedRow(row_number, f"order id is not a number: '{row.get(ORDER_ID_COLUMN_NAME)}'")) #gibt den value zu dem key ohne error
                 continue
 
             if order_id <= 0:
@@ -66,7 +66,7 @@ def parse_csv(path: Path): #path ist der dateipfad
                 continue
 
             except ValueError:
-                skipped.append(SkippedRow(row_number, f"order date is not a valid date: '{order_date}'"))
+                skipped.append(SkippedRow(row_number, f"order date is not a valid date: '{row.get(ORDER_DATE_COLUMN_NAME)}'"))
                 continue
 
             # 4. customer_id prüfen
@@ -93,7 +93,7 @@ def parse_csv(path: Path): #path ist der dateipfad
                 continue
 
             except ValueError:
-                skipped.append(SkippedRow(row_number, f"quantity is not a number: '{quantity}'"))
+                skipped.append(SkippedRow(row_number, f"quantity is not a number: '{row.get(QUANTITY_COLUMN_NAME)}'"))
                 continue
 
             if quantity <= 0:
@@ -108,7 +108,7 @@ def parse_csv(path: Path): #path ist der dateipfad
                 continue
 
             except ValueError:
-                skipped.append(SkippedRow(row_number, f"unit price is not a number: '{unit_price}'"))
+                skipped.append(SkippedRow(row_number, f"unit price is not a number: '{row.get(UNIT_PRICE_COLUMN_NAME)}'"))
                 continue
 
             if unit_price <= 0:
